@@ -1,4 +1,5 @@
-const reallyGreatDate = new Date(2026, 3, 11, 15, 0, 0)
+// malo by byt 15 ale casova zona, takze 16
+const reallyGreatDate = new Date(2026, 3, 11, 16, 0, 0)
 
 function pluralize(value, forms) {
     // forms = [1, 2-4, 5+]
