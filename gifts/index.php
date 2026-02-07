@@ -6,7 +6,7 @@
 //  - PUT /gifts/{id}      -> mark given id as reserved (reserved = 1)
 
 // Configuration
-$dbFile = __DIR__ . '/gifts.db';
+$dbFile = __DIR__ . '/../../shared/gifts.db';
 
 // Helpers
 function send_json($data, $status = 200) {
