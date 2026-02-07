@@ -1,0 +1,50 @@
+
+.section-acco {
+    /* switched from full-viewport fixed layout to flexible, responsive layout */
+    min-height: 100vh; /* full viewport height */
+    width: 100%;
+    background-color: #E9DCCB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 32px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+}
+
+.section-acco > .img-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-acco > .img-left img {
+    width: 100%;
+    height: auto;
+    max-height: 520px; /* avoid extremely tall images on large screens */
+    display: block;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.section-acco > .content {
+    flex: 1 1 55%;
+    margin: 0;
+    padding: 12px 6px;
+    text-align: left;
+    max-width: 680px; /* limit line length for readability */
+}
+
+.section-acco > .content h1 {
+    font-size: clamp(1.2rem, 3.6vw, 2.4rem);
+    margin: 0 0 8px;
+}
+
+.section-acco > .content p,
+.section-acco > .content a,
+.section-acco > .content div {
+    font-size: clamp(0.95rem, 2.6vw, 1.5rem);
+    line-height: 1.45;
+    text-align: center;
+}

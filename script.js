@@ -68,17 +68,17 @@ function updateGiftButtons(gifts) {
         btn.dataset.giftId = id
         if (reservedMap[id]) {
             btn.disabled = true
-            btn.textContent = 'Reserved'
+            btn.textContent = 'Vybraný'
             btn.classList.add('reserved')
         } else {
             btn.disabled = false
-            btn.textContent = 'Reserve'
+            btn.textContent = 'Vybrať dar'
             btn.classList.remove('reserved')
         }
     })
 }
 
-// Handler for Reserve button clicks (uses event delegation)
+// Handler for Vybrať dar button clicks (uses event delegation)
 async function onGiftsClick(ev) {
     const btn = ev.target.closest('button')
     if (!btn) return
@@ -91,7 +91,7 @@ async function onGiftsClick(ev) {
 
     if (btn.disabled) return
 
-    const confirmed = window.confirm('Reserve this gift?')
+    const confirmed = window.confirm('Vybrať dar this gift?')
     if (!confirmed) return
 
     // Optimistic UI: disable button while request is ongoing
@@ -124,7 +124,7 @@ async function onGiftsClick(ev) {
         }
 
         // Success: mark as reserved
-        btn.textContent = 'Reserved'
+        btn.textContent = 'Vybraný'
         btn.classList.add('reserved')
         btn.disabled = true
     } catch (err) {
@@ -141,7 +141,7 @@ addEventListener('DOMContentLoaded', () => {
     countdown()
     setInterval(countdown, 1000)
 
-    // Attach click handler for Reserve buttons
+    // Attach click handler for Vybrať dar buttons
     const giftsSection = document.querySelector('.section-gifts')
     if (giftsSection) {
         giftsSection.addEventListener('click', onGiftsClick)
