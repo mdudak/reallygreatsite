@@ -78,6 +78,76 @@ function updateGiftButtons(gifts) {
     })
 }
 
+// Create confirmation modal in DOM (if not present)
+function ensureConfirmModal() {
+    if (document.getElementById('gift-confirm-modal')) return
+
+    const modal = document.createElement('div')
+    modal.id = 'gift-confirm-modal'
+    modal.innerHTML = `
+      <div class="overlay" tabindex="-1"></div>
+      <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="gift-confirm-title">
+        <h3 id="gift-confirm-title">Potvrdiť výber daru</h3>
+        <p id="gift-confirm-text">Naozaj chcete vybrať tento dar?</p>
+        <div class="buttons">
+          <button class="cancel">Zrušiť</button>
+          <button class="confirm">Potvrdiť</button>
+        </div>
+      </div>
+    `
+    document.body.appendChild(modal)
+
+    // Accessibility: close on overlay click or Escape
+    modal.querySelector('.overlay').addEventListener('click', () => {
+        modal.classList.remove('active')
+    })
+    modal.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') modal.classList.remove('active')
+    })
+}
+
+// Show confirmation dialog, return Promise<boolean>
+function showConfirmDialog(message) {
+    ensureConfirmModal()
+    const modal = document.getElementById('gift-confirm-modal')
+    const titleEl = modal.querySelector('#gift-confirm-title')
+    const textEl = modal.querySelector('#gift-confirm-text')
+    const btnConfirm = modal.querySelector('button.confirm')
+    const btnCancel = modal.querySelector('button.cancel')
+
+    textEl.textContent = message || 'Naozaj chcete vybrať tento dar?'
+
+    return new Promise((resolve) => {
+        modal.classList.add('active')
+        // focus management
+        btnCancel.focus()
+
+        function cleanup(result) {
+            modal.classList.remove('active')
+            btnConfirm.removeEventListener('click', onConfirm)
+            btnCancel.removeEventListener('click', onCancel)
+            modal.removeEventListener('keydown', onKey)
+            resolve(result)
+        }
+
+        function onConfirm() {
+            cleanup(true)
+        }
+
+        function onCancel() {
+            cleanup(false)
+        }
+
+        function onKey(e) {
+            if (e.key === 'Escape') cleanup(false)
+        }
+
+        btnConfirm.addEventListener('click', onConfirm)
+        btnCancel.addEventListener('click', onCancel)
+        modal.addEventListener('keydown', onKey)
+    })
+}
+
 // Handler for Vybrať dar button clicks (uses event delegation)
 async function onGiftsClick(ev) {
     const btn = ev.target.closest('button')
@@ -91,7 +161,7 @@ async function onGiftsClick(ev) {
 
     if (btn.disabled) return
 
-    const confirmed = window.confirm('Vybrať dar this gift?')
+    const confirmed = await showConfirmDialog('Naozaj chcete vybrať tento dar?')
     if (!confirmed) return
 
     // Optimistic UI: disable button while request is ongoing
@@ -117,7 +187,7 @@ async function onGiftsClick(ev) {
                 if (body && body.error) errMsg = body.error
             } catch (e) {
             }
-            alert('Failed to reserve gift: ' + errMsg)
+            alert('Nepodarilo sa vybrať dar: ' + errMsg)
             btn.disabled = false
             btn.textContent = prevText
             return
@@ -129,7 +199,7 @@ async function onGiftsClick(ev) {
         btn.disabled = true
     } catch (err) {
         console.error('PUT /gifts/' + id + ' failed', err)
-        alert('Network error while reserving. Please try again.')
+        alert('Chyba pripojenia. Prosím skúste to znovu.')
         btn.disabled = false
         btn.textContent = prevText
     }

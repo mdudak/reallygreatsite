@@ -1,3 +1,13 @@
+/* Theme variables for the site */
+:root{
+  --bg: #E9DCCB;
+  --text: #2F2A26;
+  --muted: #6B5F57;
+  --accent: #C7A689;
+  --card: rgba(255,255,255,0.20);
+  --border: rgba(47,42,38,0.18);
+}
+
 html {
     scroll-behavior: smooth;
     font-size: 12px;
@@ -11,8 +21,8 @@ body {
     margin: 0;
     min-height: 100vh;
     font-family: Garamond, serif;
-    background: #fafafa;
-    color: #1a1a1a;
+    background: var(--bg);
+    color: var(--text);
 }
 
 .main {
