@@ -1,11 +1,11 @@
 /* Theme variables for the site */
-:root{
-  --bg: #E9DCCB;
-  --text: #2F2A26;
-  --muted: #6B5F57;
-  --accent: #C7A689;
-  --card: rgba(255,255,255,0.20);
-  --border: rgba(47,42,38,0.18);
+:root {
+    --bg: #E9DCCB;
+    --text: #2F2A26;
+    --muted: #6B5F57;
+    --accent: #C7A689;
+    --card: rgba(255, 255, 255, 0.20);
+    --border: rgba(47, 42, 38, 0.18);
 }
 
 html {
@@ -31,4 +31,208 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
+}
+
+@font-face {
+    font-family: "new-icon";
+    src: url("./fonts/New-Icon-Serif-Exfonte9d1.otf") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: block; /* prevents flashing to random characters */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "new-icon", Garamond, serif;
+    letter-spacing: 0.02em;
+}
+
+h2 {
+    font-variant-caps: petite-caps;
+    font-size: clamp(1.75rem, 3.0vw, 4rem);
+}
+
+.section-main {
+    height: 100vh;
+    width: 100%;
+    background-image: url("../images/section-main.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-main::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 1;
+}
+
+.section-main > .content {
+    text-align: center;
+    color: white;
+    font-size: 3rem;
+    z-index: 2;
+}
+
+.section-main > .content #countdown {
+    margin-top: 1rem;
+}
+
+.section-main > a {
+    position: absolute;
+    padding: 10px;
+    bottom: 15vh;
+    font-size: 2.5rem;
+    color: white;
+    text-decoration: none;
+    animation: bounce 1.5s infinite;
+    z-index: 2;
+    border: 1px solid white;
+    background: transparent;
+}
+
+.section-main > .content > a:hover {
+    color: #fafafa;
+}
+
+.section-form {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.section-last {
+    height: 100vh;
+    width: 100%;
+    background-image: url("../images/prsen.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.site-footer {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.35);
+    border-top: 1px solid var(--border);
+    padding: 32px 16px;
+}
+
+.site-footer > .content {
+    width: min(980px, 100%);
+    margin: 0 auto;
+    text-align: center;
+}
+
+.site-footer .contacts {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin: 12px 0;
+    font-size: 1.2rem;
+}
+
+.site-footer a {
+    color: inherit;
+}
+
+
+.section {
+    min-height: 100vh;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+}
+
+.section-color-odd {
+    background-color: #A4A49D;
+}
+
+.section-color-even {
+    background-color: #BFC2C1;
+}
+
+.content-left {
+    width: min(900px, 92%);
+    margin-left: 5%;
+    padding: 32px 0;
+
+    text-align: start;
+    line-height: 1.45;
+    z-index: 2;
+}
+
+.content-right {
+    width: 100%;
+    margin: 0;
+    padding: 12px 6px;
+    text-align: left;
+    max-width: none;
+}
+
+.content-text {
+    font-size: clamp(1.15rem, 2.2vw, 2rem);
+}
+
+.img-left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    /* no frame around the image */
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+
+    max-height: calc(100vh - 96px);
+}
+
+.img-left img {
+    min-height: 90vh;
+    height: auto;
+    max-height: calc(100vh - 96px);
+    display: block;
+
+    /* portrait image should not be cropped */
+    object-fit: contain;
+    border-radius: 0;
+}
+
+.img-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    /* no frame around the image */
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+
+    max-height: calc(100vh - 96px);
+}
+
+.img-right img {
+    min-height: 90vh;
+    height: auto;
+    max-height: calc(100vh - 96px);
+    display: block;
+
+    /* portrait image should not be cropped */
+    object-fit: contain;
+    border-radius: 0;
 }
