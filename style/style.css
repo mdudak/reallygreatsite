@@ -128,14 +128,16 @@ h3 {
     font-size: clamp(1.1rem, 2.0vw, 2.8rem);
 }
 
-.section-main #countdown-container {
-    margin-top: 4.2rem;
-    font-size: clamp(1.0rem, 1.6vw, 2.2rem);
+.countdown-container {
+    position: absolute;
+    top: 5.2rem;
+    margin-top: 1.2rem;
+    font-size: clamp(1.5rem, 2vw, 3rem);
+    color: #fff;
 }
 
-.section-main #countdown {
+#countdown {
     margin-top: 0.6rem;
-    font-size: clamp(1.0rem, 1.8vw, 2.4rem);
 }
 
 .section-main > a {
@@ -209,7 +211,6 @@ h3 {
 }
 
 .section-last > * {
-    position: relative;
     z-index: 2;
 }
 
@@ -508,6 +509,4 @@ h3 {
     .gifts-table td:last-child {
         width: 150px;
     }
-}
-}
 }
