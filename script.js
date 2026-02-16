@@ -56,7 +56,7 @@ function updateGiftButtons(gifts) {
         reservedMap[Number(g.id)] = Boolean(g.reserved)
     }
 
-    const rows = document.querySelectorAll('.section-gifts table tr')
+    const rows = document.querySelectorAll('.gifts-table tbody tr')
     rows.forEach(row => {
         const idStr = row.id
         if (!idStr) return
@@ -65,7 +65,7 @@ function updateGiftButtons(gifts) {
         const btn = row.querySelector('button')
         if (!btn) return
 
-        btn.dataset.giftId = id
+        btn.dataset.giftId = String(id)
         if (reservedMap[id]) {
             btn.disabled = true
             btn.textContent = 'Vybraný'
@@ -110,7 +110,6 @@ function ensureConfirmModal() {
 function showConfirmDialog(message) {
     ensureConfirmModal()
     const modal = document.getElementById('gift-confirm-modal')
-    const titleEl = modal.querySelector('#gift-confirm-title')
     const textEl = modal.querySelector('#gift-confirm-text')
     const btnConfirm = modal.querySelector('button.confirm')
     const btnCancel = modal.querySelector('button.cancel')
@@ -211,10 +210,10 @@ addEventListener('DOMContentLoaded', () => {
     countdown()
     setInterval(countdown, 1000)
 
-    // Attach click handler for Vybrať dar buttons
-    const giftsSection = document.querySelector('.section-gifts')
-    if (giftsSection) {
-        giftsSection.addEventListener('click', onGiftsClick)
+    // Attach click handler for gifts table buttons
+    const giftsTable = document.querySelector('.gifts-table')
+    if (giftsTable) {
+        giftsTable.addEventListener('click', onGiftsClick)
     }
 
     // Fetch current gifts state and update UI

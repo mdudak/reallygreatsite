@@ -344,3 +344,164 @@ h2 {
         object-fit: cover;
     }
 }
+
+/* Gift confirm modal */
+#gift-confirm-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+#gift-confirm-modal.active {
+    display: flex;
+}
+
+#gift-confirm-modal .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+#gift-confirm-modal .dialog {
+    position: relative;
+    z-index: 1;
+
+    width: min(520px, calc(100% - 32px));
+    padding: 18px;
+    border-radius: 12px;
+
+    background: #fff;
+    color: #2F2A26;
+    box-shadow: 0 14px 48px rgba(0, 0, 0, 0.22);
+}
+
+#gift-confirm-modal .dialog h3 {
+    margin: 0 0 10px;
+    font-size: clamp(1.4rem, 2.0vw, 2rem);
+}
+
+#gift-confirm-modal .dialog p {
+    margin: 0 0 16px;
+    color: rgba(47, 42, 38, 0.85);
+    font-size: clamp(1.2rem, 1.6vw, 1.6rem);
+    line-height: 1.35;
+}
+
+#gift-confirm-modal .buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+#gift-confirm-modal button {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(47, 42, 38, 0.18);
+    background: #fff;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: clamp(1.05rem, 1.4vw, 1.35rem);
+}
+
+#gift-confirm-modal button.confirm {
+    background: var(--accent);
+    color: #fff;
+    border-color: rgba(0, 0, 0, 0.06);
+}
+
+#gift-confirm-modal button.cancel {
+    background: transparent;
+}
+
+@media (max-width: 480px) {
+    #gift-confirm-modal .dialog {
+        padding: 14px;
+    }
+
+    #gift-confirm-modal .buttons {
+        justify-content: center;
+    }
+}
+
+/* Gifts table */
+.gifts-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+}
+
+.gifts-table th,
+.gifts-table td {
+    padding: 12px 10px;
+    vertical-align: top;
+}
+
+.gifts-table thead th {
+    text-align: left;
+    font-weight: 800;
+    color: var(--text);
+    border-bottom: 1px solid rgba(47, 42, 38, 0.35);
+}
+
+/* horizontal lines between body rows */
+.gifts-table tbody tr + tr td {
+    border-top: 1px solid rgba(47, 42, 38, 0.22);
+}
+
+.gifts-table td:last-child {
+    text-align: right;
+    white-space: nowrap;
+    width: 170px;
+}
+
+.gifts-table a {
+    font-weight: 800;
+}
+
+/* Gift button */
+.gifts-table button {
+    appearance: none;
+    border: 1px solid rgba(47, 42, 38, 0.30);
+    background: rgba(255, 255, 255, 0.25);
+    color: var(--text);
+
+    padding: 10px 14px;
+    border-radius: 999px;
+    font-weight: 900;
+    cursor: pointer;
+
+    transition: transform 120ms ease, background-color 120ms ease, border-color 120ms ease, opacity 120ms ease;
+}
+
+.gifts-table button:hover {
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.40);
+    border-color: rgba(47, 42, 38, 0.45);
+}
+
+.gifts-table button:focus-visible {
+    outline: 3px solid rgba(199, 166, 137, 0.55);
+    outline-offset: 2px;
+}
+
+.gifts-table button:disabled,
+.gifts-table button.reserved {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+@media (max-width: 700px) {
+    /* hide description column if needed */
+    .gifts-table th:nth-child(2),
+    .gifts-table td:nth-child(2) {
+        display: none;
+    }
+
+    .gifts-table td:last-child {
+        width: 150px;
+    }
+}
