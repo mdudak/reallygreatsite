@@ -82,6 +82,10 @@ h2 {
     font-size: clamp(3rem, 3.5vw, 4.5rem);
 }
 
+h3 {
+    font-size: clamp(2rem, 2.5vw, 3.5rem);
+}
+
 .section-main {
     height: 100vh;
     width: 100%;
@@ -504,4 +508,6 @@ h2 {
     .gifts-table td:last-child {
         width: 150px;
     }
+}
+}
 }
