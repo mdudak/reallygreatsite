@@ -94,10 +94,16 @@ h3 {
     background-position: center;
     background-repeat: no-repeat;
 
-    display: flex;
-    flex-direction: column;
+    position: relative;
+
+    /* layout */
+    display: grid;
+    grid-template-columns: 1fr auto auto 1fr;
+    justify-items: center;
     align-items: center;
-    justify-content: center;
+    align-content: center;
+    column-gap: clamp(12px, 3vw, 36px);
+    row-gap: clamp(8px, 1.2vh, 18px);
 
     padding: 8vh 16px 72px;
     text-align: center;
@@ -121,11 +127,13 @@ h3 {
     font-size: clamp(2.8rem, 6.2vw, 8rem);
     line-height: 1.05;
     margin: 0 0 0.5rem;
+    grid-column: 1 / -1;
 }
 
 .section-main > p {
     margin: 0.25rem 0;
     font-size: clamp(1.1rem, 2.0vw, 2.8rem);
+    grid-column: 1 / -1;
 }
 
 .countdown-container {
@@ -141,7 +149,8 @@ h3 {
 }
 
 .section-main > a {
-    margin-top: 3.4rem;
+    /* buttons (Fotky/Video) side-by-side */
+    margin-top: clamp(1.6rem, 2.6vh, 3.4rem);
     font-size: clamp(1.05rem, 1.6vw, 2.2rem);
     color: #fff;
     text-decoration: none;
@@ -150,6 +159,21 @@ h3 {
     padding: 10px;
     border: 1px solid white;
     animation: bounce 1.5s infinite;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    min-width: clamp(120px, 18vw, 220px);
+}
+
+/* Place the two action links into the same grid row */
+.section-main > a:nth-of-type(1) {
+    grid-column: 2;
+}
+
+.section-main > a:nth-of-type(2) {
+    grid-column: 3;
 }
 
 .section-main > a:hover {
@@ -176,6 +200,18 @@ h3 {
         /* 66% horizontálne ~ posledná tretina zľava */
         background-position: 66% 50%;
         padding-top: 10vh;
+    }
+}
+
+@media (max-width: 420px) {
+    .section-main {
+        grid-template-columns: 1fr;
+    }
+
+    .section-main > a:nth-of-type(1),
+    .section-main > a:nth-of-type(2) {
+        grid-column: 1;
+        width: min(420px, 84vw);
     }
 }
 
@@ -509,4 +545,21 @@ h3 {
     .gifts-table td:last-child {
         width: 150px;
     }
+}
+
+/* Photos section (Google Photos embed) */
+.section-photos {
+    width: 100%;
+    min-height: 100vh;
+
+    /* full-bleed */
+    padding: 0;
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: stretch;
+
+    background: var(--bg);
 }
